@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="restRequestHandler"
+          name="RestRequestHandler"
+          class="com.pf.mgmt.handler.RestRequestHandler">
+        <property name="jsonHandler" ref="jsonHandler"/>
+        <property name="tradeServiceDAO" ref="tradeServiceDAO"/>
+    </bean>
+
+    <bean id="dbConnector" name="dbConnector" class="com.pf.mgmt.db.DatabaseConnector">
+        <property name="dBURL" value="jdbc:oracle:thin:@localhost:1521:HCL_PF_MANAGEMENT"/>
+        <property name="dBUser" value="jdbc:oracle:thin:@localhost:1521:HCL_PF_MANAGEMENT"/>
+        <property name="dBPwd" value="jdbc:oracle:thin:@localhost:1521:HCL_PF_MANAGEMENT"/>
+    </bean>
+
+    <bean id="jsonHandler" name="jsonHandler" class="com.pf.mgmt.utility.JsonHandler" scope="prototype">
+    </bean>
+
+    <bean id="tradeServiceDAO" name="tradeServiceDAO" class="com.pf.mgmt.db.TradeServiceDAO" scope="prototype">
+        <property name="dbConnector" ref="dbConnector"/>
+    </bean>
+</beans>
